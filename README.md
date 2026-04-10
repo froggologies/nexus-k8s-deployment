@@ -106,3 +106,10 @@ The pipeline would:
 3. Automatically deploy to a test environment
 
 This ensures that every change in test branch is automatically deployed to a test environment.
+
+## Future Improvements
+
+1. Enhanced IAM permission using least privilege access
+2. Private cluster with a hardened network
+3. Add datastore provisioning as the gcs blobstore require
+4. Add CI/CD pipeline for the deployment
