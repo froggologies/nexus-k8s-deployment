@@ -2,8 +2,11 @@
 
 ## Prerequisites:
 
-1. Create GCP Project
-2. Enable Kubernetes Engine API
+- GCP Project
+    - Kubernetes Engine API
+- gcloud
+- terraform
+- docker
 
 ![Kubernetes Engine API](docs/SCR-20260410-oqrf.png "Kubernetes Engine API")
 
@@ -48,3 +51,29 @@ docker push asia-southeast2-docker.pkg.dev/$PROJECT_ID/$PROJECT_ID/my-nexus:late
 ```
 
 ![push image](docs/SCR-20260410-pjzi.png "push image")
+
+## Deploy Nexus 3 to GKE
+
+Get credentials to access GKE cluster
+
+```bash
+export PROJECT_ID="<project-id>"
+
+gcloud container clusters get-credentials nexus-cluster --zone asia-southeast2-a --project $PROJECT_ID
+
+helm install my-nexus ./helm/nexus
+
+kubectl exec deployment/nexus -- cat /nexus-data/admin.password
+```
+
+### Deploy nexus with helm
+
+![deploy nexus with helm](docs/SCR-20260410-pprh.png "deploy nexus with helm")
+
+### Check nexus deployment
+
+![check nexus deployment](docs/SCR-20260410-ptbo.png "check nexus deployment")
+
+### Nexus GCS Blobstore
+
+![Nexus GCS Blobstore](docs/SCR-20260410-pvsa.png "Nexus GCS Blobstore")
