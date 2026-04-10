@@ -1,0 +1,6 @@
+image:
+  repository: asia-southeast2-docker.pkg.dev/nexus-k8s-deployment/nexus-k8s-deployment/my-nexus
+  tag: latest
+
+persistence:
+  size: 10Gi
