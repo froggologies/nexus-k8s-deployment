@@ -18,7 +18,17 @@ terraform init
 terraform apply -var='project_id=<project-id>'
 ```
 
+### GCS Bucket
+
 ![GCS](docs/SCR-20260410-oqdo.png "GCS")
+
+### GKE Cluster
+
+![GKE Cluster](docs/SCR-20260410-ovgh.png "GKE Cluster")
+
+### GKE Node Pool
+
+![GKE Node Pool](docs/SCR-20260410-ovvw.png "GKE Node Pool")
 
 ## Push image to registry
 
