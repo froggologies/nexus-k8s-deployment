@@ -15,6 +15,7 @@
 ## 1. Terraform
 
 ```bash
+# Change to terraform directory
 cd terraform
 
 # Initialize terraform
@@ -48,6 +49,9 @@ terraform apply -var='project_id=$PROJECT_ID'
 # Configure docker to use GCP Artifact Registry
 gcloud auth configure-docker \
     asia-southeast2-docker.pkg.dev
+
+# Back to root directory
+cd ..
 
 # Build custom nexus image
 docker build -t asia-southeast2-docker.pkg.dev/$PROJECT_ID/$PROJECT_ID/my-nexus:latest .
