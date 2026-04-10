@@ -2,23 +2,28 @@
 
 ## Prerequisites:
 
-- GCP Project
+- GCP project
     - Kubernetes Engine API
 - gcloud
 - terraform
 - docker
+- helm
 
 ![Kubernetes Engine API](docs/SCR-20260410-oqrf.png "Kubernetes Engine API")
 
 
-## Terraform
+## 1. Terraform
 
 ```bash
 cd terraform
 
+# Initialize terraform
 terraform init
 
-terraform apply -var='project_id=<project-id>'
+export PROJECT_ID="<project-id>"
+
+# Apply terraform
+terraform apply -var='project_id=$PROJECT_ID'
 ```
 
 ### GCS Bucket
@@ -37,32 +42,32 @@ terraform apply -var='project_id=<project-id>'
 
 ![Artifact Registry](docs/SCR-20260410-peze.png "Artifact Registry")
 
-## Push image to registry
+## 2. Build and push image to registry
 
 ```bash
+# Configure docker to use GCP Artifact Registry
 gcloud auth configure-docker \
     asia-southeast2-docker.pkg.dev
 
-export PROJECT_ID="<project-id>"
-
+# Build custom nexus image
 docker build -t asia-southeast2-docker.pkg.dev/$PROJECT_ID/$PROJECT_ID/my-nexus:latest .
 
+# Push image to registry
 docker push asia-southeast2-docker.pkg.dev/$PROJECT_ID/$PROJECT_ID/my-nexus:latest
 ```
 
 ![push image](docs/SCR-20260410-pjzi.png "push image")
 
-## Deploy Nexus 3 to GKE
-
-Get credentials to access GKE cluster
+## 3. Deploy Nexus 3 to GKE
 
 ```bash
-export PROJECT_ID="<project-id>"
-
+# Get credentials to access GKE cluster
 gcloud container clusters get-credentials nexus-cluster --zone asia-southeast2-a --project $PROJECT_ID
 
+# Deploy nexus with helm
 helm install my-nexus ./helm/nexus
 
+# Get admin password
 kubectl exec deployment/nexus -- cat /nexus-data/admin.password
 ```
 
