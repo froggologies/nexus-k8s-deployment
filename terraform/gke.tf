@@ -3,6 +3,7 @@ resource "google_container_cluster" "nexus_cluster" {
   location = var.zone
 
   network                  = google_compute_network.default.name
+  subnetwork               = google_compute_subnetwork.asia_southeast2.name
   remove_default_node_pool = true
   initial_node_count       = 1
   deletion_protection      = false
