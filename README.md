@@ -5,7 +5,7 @@
 1. Create GCP Project
 2. Enable Kubernetes Engine API
 
-![Enable Kubernetes Engine API on new GCP project](docs/SCR-20260410-oqrf.png "Enable Kubernetes Engine API on new GCP project")
+![Kubernetes Engine API](docs/SCR-20260410-oqrf.png "Kubernetes Engine API")
 
 
 ## Terraform
@@ -30,12 +30,21 @@ terraform apply -var='project_id=<project-id>'
 
 ![GKE Node Pool](docs/SCR-20260410-ovvw.png "GKE Node Pool")
 
+### Artifact Registry
+
+![Artifact Registry](docs/SCR-20260410-peze.png "Artifact Registry")
+
 ## Push image to registry
 
 ```bash
+gcloud auth configure-docker \
+    asia-southeast2-docker.pkg.dev
+
 export PROJECT_ID="<project-id>"
 
-docker build -t gcr.io/$PROJECT_ID/my-nexus:latest .
+docker build -t asia-southeast2-docker.pkg.dev/$PROJECT_ID/$PROJECT_ID/my-nexus:latest .
 
-docker push gcr.io/$PROJECT_ID/my-nexus:latest
+docker push asia-southeast2-docker.pkg.dev/$PROJECT_ID/$PROJECT_ID/my-nexus:latest
 ```
+
+![push image](docs/SCR-20260410-pjzi.png "push image")
