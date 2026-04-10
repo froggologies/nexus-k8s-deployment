@@ -77,3 +77,23 @@ kubectl exec deployment/nexus -- cat /nexus-data/admin.password
 ### Nexus GCS Blobstore
 
 ![Nexus GCS Blobstore](docs/SCR-20260410-pvsa.png "Nexus GCS Blobstore")
+
+## Continuous integration - a theoretical question
+
+```
+We might have to modify the previously created files, for example because of a new Nexus version.
+
+We want this to automatically be deployed to a test environment after we have made the changes on Git.
+
+Please describe in a few words how you would satisfy this need.
+```
+
+I would set up a CI/CD pipeline for example using GitHub Actions, where I develop changes in a test branch.
+
+The pipeline would:
+
+1. Trigger on push to the test branch
+2. Validate Terraform and manifest files
+3. Automatically deploy to a test environment
+
+This ensures that every change in test branch is automatically deployed to a test environment.
